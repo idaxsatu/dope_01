@@ -23,3 +23,8 @@ contract MiniERC20 {
         name = _name;
         symbol = _symbol;
 
+        uint256 mintAmount = initialSupply * (10 ** uint256(decimals));
+        totalSupply = mintAmount;
+        balanceOf[msg.sender] = mintAmount;
+
+        emit Transfer(address(0), msg.sender, mintAmount);
