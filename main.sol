@@ -9,3 +9,14 @@ contract TimeLockVault {
     event Deposited(address indexed from, uint256 amount);
     event Withdrawn(address indexed to, uint256 amount);
 
+    error NotOwner();
+    error TooEarly(uint256 nowTime, uint256 unlockTime);
+    error ZeroAmount();
+    error TransferFailed();
+
+    constructor(uint256 _unlockTime) payable {
+        require(_unlockTime > block.timestamp, "unlockTime must be in the future");
+        owner = msg.sender;
+        unlockTime = _unlockTime;
+
+        // Optional: allow funding on deployment
