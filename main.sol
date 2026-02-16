@@ -43,3 +43,8 @@ contract MiniERC20 {
 
     function transferFrom(address from, address to, uint256 value) external returns (bool) {
         uint256 allowed = allowance[from][msg.sender];
+        require(allowed >= value, "allowance too low");
+
+        // Decrease allowance (standard behavior)
+        unchecked {
+            allowance[from][msg.sender] = allowed - value;
