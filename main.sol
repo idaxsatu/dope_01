@@ -13,3 +13,8 @@ contract MiniERC20 {
     mapping(address => mapping(address => uint256)) public allowance;
 
     event Transfer(address indexed from, address indexed to, uint256 value);
+    event Approval(address indexed owner, address indexed spender, uint256 value);
+
+    constructor(
+        string memory _name,
+        string memory _symbol,
