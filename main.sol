@@ -68,3 +68,4 @@ contract MiniERC20 {
         emit Transfer(from, to, value);
     }
 }
+
