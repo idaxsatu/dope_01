@@ -18,3 +18,8 @@ contract MiniERC20 {
     constructor(
         string memory _name,
         string memory _symbol,
+        uint256 initialSupply // whole tokens, e.g. 1_000_000
+    ) {
+        name = _name;
+        symbol = _symbol;
+
