@@ -53,3 +53,8 @@ contract MiniERC20 {
 
         _transfer(from, to, value);
         return true;
+    }
+
+    function _transfer(address from, address to, uint256 value) internal {
+        require(to != address(0), "to is zero address");
+        uint256 bal = balanceOf[from];
