@@ -20,3 +20,14 @@ contract TimeLockVault {
         unlockTime = _unlockTime;
 
         // Optional: allow funding on deployment
+        if (msg.value > 0) emit Deposited(msg.sender, msg.value);
+    }
+
+    /// @notice Deposit ETH into the vault
+    function deposit() external payable {
+        if (msg.value == 0) revert ZeroAmount();
+        emit Deposited(msg.sender, msg.value);
+    }
+
+    /// @notice Withdraw all ETH to the owner after unlock time
+    function withdraw() external {
