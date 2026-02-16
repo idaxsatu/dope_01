@@ -63,3 +63,8 @@ contract MiniERC20 {
         unchecked {
             balanceOf[from] = bal - value;
             balanceOf[to] += value;
+        }
+
+        emit Transfer(from, to, value);
+    }
+}
