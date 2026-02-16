@@ -33,3 +33,8 @@ contract MiniERC20 {
     function transfer(address to, uint256 value) external returns (bool) {
         _transfer(msg.sender, to, value);
         return true;
+    }
+
+    function approve(address spender, uint256 value) external returns (bool) {
+        allowance[msg.sender][spender] = value;
+        emit Approval(msg.sender, spender, value);
