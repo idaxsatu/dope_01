@@ -31,3 +31,14 @@ contract TimeLockVault {
 
     /// @notice Withdraw all ETH to the owner after unlock time
     function withdraw() external {
+        if (msg.sender != owner) revert NotOwner();
+        if (block.timestamp < unlockTime) revert TooEarly(block.timestamp, unlockTime);
+
+        uint256 amount = address(this).balance;
+        if (amount == 0) revert ZeroAmount();
+
+        (bool ok, ) = payable(owner).call{value: amount}("");
+        if (!ok) revert TransferFailed();
+
+        emit Withdrawn(owner, amount);
+    }
