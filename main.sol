@@ -48,3 +48,8 @@ contract MiniERC20 {
         // Decrease allowance (standard behavior)
         unchecked {
             allowance[from][msg.sender] = allowed - value;
+        }
+        emit Approval(from, msg.sender, allowance[from][msg.sender]);
+
+        _transfer(from, to, value);
+        return true;
