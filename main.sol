@@ -42,3 +42,11 @@ contract TimeLockVault {
 
         emit Withdrawn(owner, amount);
     }
+
+    /// @notice Accept plain ETH transfers
+    receive() external payable {
+        if (msg.value == 0) revert ZeroAmount();
+        emit Deposited(msg.sender, msg.value);
+    }
+}
+
